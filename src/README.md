@@ -1,4 +1,4 @@
-### Installation
+## Installation
 
 Install next libraries with embedded gem installer:
 
@@ -6,11 +6,11 @@ Install next libraries with embedded gem installer:
     /opt/td-agent/embedded/bin/fluent-gem install fluent-plugin-elasticsearch
     /opt/td-agent/embedded/bin/gem install websocket-eventmachine-client
 
-**Important**: installation of those dependencies will require development tools (gcc, make) and compilation.
+**Important**: installation of these dependencies will require development tools (gcc, make) and compilation.
 
 Once installed, start fluentd daemon poiting plugins path to directory containing those 3 plugins (either with `-p dir` if you invoke from command line, or with `ENV["FLUENT_PLUGIN"]` if you invoke as service)
 
-### Concept
+## Concept
 
 Changes feed plugin outputs ES events as messages like these:
 
@@ -18,7 +18,7 @@ Changes feed plugin outputs ES events as messages like these:
     {"_index":"sni_cv","_type":"searchdocument","_id":"CRJQ0FG68CQ7L1TXWLJP","_timestamp":"2016-06-07T14:22:56.982Z","_version":1,"_operation":"CREATE","_source":{ <...> }
     {"_index":"kforce_vac","_type":"searchdocument","_id":"T1BF0G91EHZR","_timestamp":"2016-06-07T14:22:55.762Z","_version":1,"_operation":"DELETE"}
 
-where `_source` is indexed document itself. Note that in case of DELETE, there is no `_source` field.
+where `_source` is the indexed document itself. Note that in case of DELETE, there is no `_source` field.
 
 `in_emwebsocket.rb` listens local websocket on `:url` to get those messages, transforms them to JSON format and tags with appropriate tag name ("tag" config parameter).
 
