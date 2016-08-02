@@ -6,7 +6,7 @@ Install next libraries with embedded gem installer:
     /opt/td-agent/embedded/bin/fluent-gem install fluent-plugin-elasticsearch
     /opt/td-agent/embedded/bin/gem install websocket-eventmachine-client
 
-Important: some of those will require development tools (gcc, make) and compilation.
+**Important**: installation of those dependencies will require development tools (gcc, make) and compilation.
 
 Once installed, start fluentd daemon poiting plugins path to directory containing those 3 plugins (either with `-p dir` if you invoke from command line, or with `ENV["FLUENT_PLUGIN"]` if you invoke as service)
 
@@ -31,4 +31,4 @@ where `_source` is indexed document itself. Note that in case of DELETE, there i
 
 `out_elasticsearch_patched.rb` sends everything to remote cluster, with custom behavior on `write_operation` parameter: it's actually ignored, and the lowercase value of `_operation` key is taken as bulk API action.
 
-`_operation` key is **removed by `out_elasticsearch_patched.rb` plugin**
+**Important**: `_operation` key is removed by `out_elasticsearch_patched.rb` plugin
