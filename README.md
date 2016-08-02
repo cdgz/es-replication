@@ -20,7 +20,7 @@ Stream out changes from the cluster using websockets: install changes feed plugi
 
 Listen to websocket and forward changes to remote cluster, on every node:
 
-- install fluentd daemon and 3 plugins plugins from `src/` on every Elastic node (check `src/README.md` for dependencies)
+- install fluentd daemon and 3 plugins plugins from `src/` on every Elastic node (check `src/README.md` for instructions)
 - launch fluentd daemon with below configuration file (replace `REMOTE_*` with your values)
 
 <b></b>
