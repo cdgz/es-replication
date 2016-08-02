@@ -18,7 +18,7 @@ Stream out changes from the cluster using websockets: install changes feed plugi
 
 ### Listen and forward
 
-Listen to websockets and forward changes to remote cluster: install fluentd daemon and 3 plugins plugins from `src/` on every Elastic node; launch fluentd daemon with below configuration file (replace `REMOTE_*` with your values):
+Listen to websockets and forward changes to remote cluster: install fluentd daemon and 3 plugins plugins from `src/` on every Elastic node (check `src/README.md` for dependencies). Finally, launch fluentd daemon with below configuration file (replace `REMOTE_*` with your values):
 
 	<source>
 	  type emwebsocket
@@ -51,12 +51,12 @@ If everything goes right, in the logs of every fluentd daemon you should see:
 
 If you don't see those messages, and nothing on remote cluster - try to debug by running fluentd in attached mode (`-c conf -p plugins`)
 
-### Acknowledgements
-
-@jurgc11, @uken, ES community for clear directions, logstash community for trying to help
-
 ### Background
 
 This solution runs in production on relatively high load ES setup (>50k creates/updates/deletes per day). It was tested during DC-failover simulation, when entry point was switched from colocated hardware to AWS, where all data is live-replicated (1T+ of Postgres / Cassandra / Elasticsearch) 
 
 Initially, logstash was used as shipping daemon. Due to its instability on big amounts of data, we decided to switch to fluentd. Nevertheless, big thanks to logstash community for reactive support
+
+### Acknowledgements
+
+@jurgc11, @uken, ES community for clear directions, logstash community for trying to help
