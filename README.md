@@ -6,10 +6,10 @@ This document explains how to setup uni-directional streaming replication betwee
 Requirements
 ------------
 
-Elasticsearch >= 1.4.0
-Elasticsearch changes feed plugin >= 1.4.0
-fluentd >= 0.12.20
-custom fluentd plugins
+* Elasticsearch >= 1.4.0
+* Elasticsearch changes feed plugin >= 1.4.0
+* fluentd >= 0.12.20
+* custom fluentd plugins (see src/)
 
 Stream out
 ----------
@@ -22,7 +22,9 @@ Stream out changes from the cluster using websockets: install changes feed plugi
 Listen and forward
 ------------------
 
-Listen to websockets and forward changes to remote cluster. Install fluent-plugin-websocket-input, fluent-plugin-filter-json-merge and fluent-plugin-elasticsearch-patched fluentd plugins on every Elastic node. Launch fluentd daemon with below configuration file:
+Listen to websockets and forward changes to remote cluster. Install **fluent-plugin-websocket-input, fluent-plugin-filter-json-merge and fluent-plugin-elasticsearch-patched** fluentd plugins (see src/) on every Elastic node.
+
+Launch fluentd daemon with below configuration file:
 
 	<source>
 	  type emwebsocket
