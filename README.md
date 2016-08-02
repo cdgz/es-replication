@@ -44,7 +44,7 @@ Listen to websocket and forward changes to remote cluster, on every node:
 	  target_index_key _index 
 	  target_type_key _type
 	  id_key _id
-	  remove_keys _index, _type, _id, _timestamp, _version
+	  remove_keys _index, _type, _id, _timestamp, _version # NOTE: _operation is also removed by this plugin!
 	</match>
 
 ### Troubleshooting
