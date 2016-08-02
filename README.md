@@ -1,28 +1,24 @@
-ES streaming replication
-------------------------
+# ES streaming replication
 
 This document explains how to setup uni-directional streaming replication between 2 Elasticsearch clusters
 
-Requirements
-------------
+### Requirements
 
 * Elasticsearch >= 1.4.0
 * Elasticsearch changes feed plugin >= 1.4.0
 * fluentd >= 0.12.20
 * custom fluentd plugins (see src/)
 
-Stream out
-----------
+### Stream out
 
 Stream out changes from the cluster using websockets: install changes feed plugin and restart the cluster, node by node
 
 	# installing v1.4.0
 	/usr/share/elasticsearch/bin/plugin --install es-changes-feed-plugin --url  https://github.com/jurgc11/es-change-feed-plugin/releases/download/v1.4.0/es-changes-feed-plugin.zip
 
-Listen and forward
-------------------
+### Listen and forward
 
-Listen to websockets and forward changes to remote cluster: install 3 plugins fluentd plugins from src/ on every Elastic node, and launch fluentd daemon with below configuration file (replace `REMOTE_*` with your values):
+Listen to websockets and forward changes to remote cluster: install fluentd daemon and 3 plugins plugins from `src/` on every Elastic node; launch fluentd daemon with below configuration file (replace `REMOTE_*` with your values):
 
 	<source>
 	  type emwebsocket
@@ -45,3 +41,12 @@ Listen to websockets and forward changes to remote cluster: install 3 plugins fl
 	  id_key _id
 	  remove_keys _index, _type, _id, _timestamp, _version
 	</match>
+
+### Troubleshooting
+
+If everything goes right, in the logs of every fluentd daemon you should see:
+
+    2016-07-25 16:29:35 +0200 [info]: Connected to ws://localhost:9400/ws/_changes
+    2016-07-25 16:30:36 +0200 [info]: Connection opened to Elasticsearch cluster => {:host=>"REMOTE_ELASTIC_NODE", :port=>REMOTE_ELASTIC_PORT, :scheme=>"http"}
+
+If you don't see those messages, and nothing on remote cluster - try to debug by running fluentd in attached mode (`-c conf -p plugins`)
