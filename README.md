@@ -60,7 +60,7 @@ If you don't see those messages, and nothing on remote cluster - try to debug by
 
 This solution runs in production on relatively high load ES setup (>100k creates/updates/deletes per day). It was tested during DC-failover simulation, when entry point was switched from colocated hardware to AWS, where all data is live-replicated (1T+ of Postgres / Cassandra / Elasticsearch) 
 
-Initially, logstash was used as shipping daemon. Due to its instability on big amounts of data, we decided to switch to fluentd. Nevertheless, big thanks to logstash community for reactive support
+Initially, logstash was used as shipping daemon. Due to its instability and high resource usage on big amounts of data, we decided to switch to fluentd. Nevertheless, big thanks to logstash community for reactive support
 
 ### Acknowledgements
 
