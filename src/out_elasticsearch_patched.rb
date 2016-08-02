@@ -11,7 +11,7 @@ end
 class Fluent::ElasticsearchOutput < Fluent::BufferedOutput
   class ConnectionFailure < StandardError; end
 
-  Fluent::Plugin.register_output('elasticsearch', self)
+  Fluent::Plugin.register_output('elasticsearch-patched', self)
 
   config_param :host, :string,  :default => 'localhost'
   config_param :port, :integer, :default => 9200

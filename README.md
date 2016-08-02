@@ -5,9 +5,9 @@ This document explains how to setup uni-directional streaming replication betwee
 ### Requirements
 
 * Elasticsearch >= 1.4.0
-* Elasticsearch changes feed plugin >= 1.4.0
+* [Elasticsearch changes feed plugin](https://github.com/jurgc11/es-change-feed-plugin) >= 1.4.0
 * fluentd >= 0.12.20
-* custom fluentd plugins (see src/)
+* custom fluentd plugins (see `src/`)
 
 ### Stream out
 
@@ -33,7 +33,7 @@ Listen to websockets and forward changes to remote cluster: install fluentd daem
 	</filter>
 
 	<match streaming> 
-	  type elasticsearch
+	  type elasticsearch-patched
 	  host REMOTE_ELASTIC_NODE
 	  port REMOTE_ELASTIC_PORT
 	  target_index_key _index 
@@ -50,3 +50,7 @@ If everything goes right, in the logs of every fluentd daemon you should see:
     2016-07-25 16:30:36 +0200 [info]: Connection opened to Elasticsearch cluster => {:host=>"REMOTE_ELASTIC_NODE", :port=>REMOTE_ELASTIC_PORT, :scheme=>"http"}
 
 If you don't see those messages, and nothing on remote cluster - try to debug by running fluentd in attached mode (`-c conf -p plugins`)
+
+### Acknowledgements
+
+@jurgc11, @uken, ES community for clear directions, logstash community for trying to help
