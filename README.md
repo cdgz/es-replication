@@ -1,4 +1,4 @@
-# ES streaming replication
+# Elasticsearch streaming replication
 
 This document explains how to setup uni-directional streaming replication between 2 Elasticsearch clusters
 
@@ -54,3 +54,9 @@ If you don't see those messages, and nothing on remote cluster - try to debug by
 ### Acknowledgements
 
 @jurgc11, @uken, ES community for clear directions, logstash community for trying to help
+
+### Background
+
+This solution runs in production on relatively high load ES setup (>50k creates/updates/deletes per day). It was tested during DC-failover simulation, when entry point was switched from colocated DC to AWS, where all data (1T+ of Postgres/Cassandra/Elasticsearch) was live-replicated.
+
+Initially, logstash was used as shipping daemon. Due to its instability on big amounts of data, we decided to switch to fluentd. Nevertheless, big thanks to logstash community for reactive support
