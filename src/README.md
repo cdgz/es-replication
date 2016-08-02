@@ -29,4 +29,6 @@ where `_source` is indexed document itself. Note that in case of DELETE, there i
     after:
     {"_index":"sni_cv","_type":"searchdocument","_id":"CRJQ0FF67K490C2PP24Z","_timestamp":"2016-06-07T14:22:55.048Z","_version":2,"_operation":"INDEX","extract me":"to the root"}
 
-`out_elasticsearch_patched.rb` sends everything to remote cluster, with custom behavior on `write_operation` parameter: it's actually ignored, and the lowercase value of `_operation` key is taken as bulk API action. `_operation` key later **removed by this plugin**
+`out_elasticsearch_patched.rb` sends everything to remote cluster, with custom behavior on `write_operation` parameter: it's actually ignored, and the lowercase value of `_operation` key is taken as bulk API action.
+
+`_operation` key is **removed by `out_elasticsearch_patched.rb` plugin**
